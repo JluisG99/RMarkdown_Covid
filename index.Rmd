@@ -179,3 +179,153 @@ legend(
   lty = 1,
   cex = 0.7)
 ```
+
+#### Casos diarios
+
+##### Casos positivos
+```{r casos-nuevos-positivos}
+barplot(
+  height = covid$nue_posi,
+  names.arg = format(covid$FECHA, "%Y"),
+  ann = FALSE, 
+  bty = "n", 
+  tck = 0, 
+  xaxt = "n",
+  space = 1,
+  main = "Casos positivos por día",
+  xlab = "Fecha",
+  ylab = "Casos positivos",
+  col = "blue"
+)
+
+# Fechas minima y máxima
+x_min <- min(covid$FECHA)
+x_max <- max(covid$FECHA)
+
+# Formato del eje X
+axis(
+  side = 1,
+  at = match(seq(as.Date(x_min), x_max, "years"), covid$FECHA) * (1 + 1),
+  labels = format(seq(as.Date(x_min), x_max, "years"), "%Y"),
+  lwd = 0)
+```
+
+##### Casos fallecidos
+```{r casos-nuevos-fallecidos}
+barplot(
+  height = covid$nue_falleci,
+  names.arg = format(covid$FECHA, "%Y"),
+  ann = FALSE, 
+  bty = "n", 
+  tck = 0, 
+  xaxt = "n",
+  space = 1,
+  main = "Casos fallecidos por día",
+  xlab = "Fecha",
+  ylab = "Casos fallecidos",
+  col = "blue"
+)
+
+# Fechas minima y máxima
+x_min <- min(covid$FECHA)
+x_max <- max(covid$FECHA)
+
+# Formato del eje X
+axis(
+  side = 1,
+  at = match(seq(as.Date(x_min), x_max, "years"), covid$FECHA) * (1 + 1),
+  labels = format(seq(as.Date(x_min), x_max, "years"), "%Y"),
+  lwd = 0)
+```
+
+##### Casos hospitalizados
+```{r casos-nuevos-hospitalizados}
+barplot(
+  height = covid$nue_hospi,
+  names.arg = format(covid$FECHA, "%Y"),
+  ann = FALSE, 
+  bty = "n", 
+  tck = 0, 
+  xaxt = "n",
+  space = 1,
+  main = "Nuevos hospitalizados por día",
+  xlab = "Fecha",
+  ylab = "Nuevos hospitalizados",
+  col = "blue"
+)
+
+# Fechas minima y máxima
+x_min <- min(covid$FECHA)
+x_max <- max(covid$FECHA)
+
+# Formato del eje X
+axis(
+  side = 1,
+  at = match(seq(as.Date(x_min), x_max, "years"), covid$FECHA) * (1 + 1),
+  labels = format(seq(as.Date(x_min), x_max, "years"), "%Y"),
+  lwd = 0)
+```
+
+### casos hospitalizados en salón y la cantidad de casos hospitalizados en unidad de cuidados intensivos (UCI). 
+
+```{r casos-relación-salon-uci}
+plot(
+  x = covid$UCI,
+  y = covid$salon,
+  type = "l",
+  main = "Casos Hopsitalizados en Salon",
+  xlbab = "UCI",
+  ylab = "Casos", xaxt = "n", 
+yaxt = "n",
+col = "blue"
+)
+
+# Formato del eje X
+axis(
+  side = 1,
+  covid$UCI,
+  tick = FALSE,
+  format(covid$UCI),
+  cex.axis = .7
+)
+# Formato del eje Y
+axis(
+  side = 2,
+  covid$salon,
+  labels = TRUE,
+  at = seq(0, 1000000, by = 250000),
+  cex.axis = .5
+)
+
+# hospitalizados salon
+lines(covid$UCI, covid$UCI, col="red")
+
+# hospitalizados salon
+lines(covid$salon, covid$salon, col="green")
+
+
+# Formato del eje X
+axis(side = 1,
+     covid$UCI,
+     tick = FALSE,
+     format(covid$UCI),
+     cex.axis = .7)
+
+# Formato del eje Y
+axis(
+  side = 2,
+  covid$salon,
+  labels = TRUE,  
+  at = seq(0, 1000000, by = 200000),
+  cex.axis = .7
+)
+
+# Leyenda
+legend(
+  x = "topright",
+  inset = 0.03,
+  legend = c("salon", "UCI",),
+  col = c("blue", "green"),
+  lty = 1,
+  cex = 0.7)
+```
